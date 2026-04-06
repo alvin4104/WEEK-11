@@ -1,0 +1,36 @@
+GOLD DATA & EVALUATION
+  [NLTK]
+    Sentence 1 lemmas  : ['artificial', 'intelligence', 'transforming', 'education']
+    Gold lemmas         : ['artificial', 'intelligence', 'transform', 'education']
+    Sentence 2 lemmas  : ['quick', 'brown', 'fox', 'jump', 'lazy', 'dog']
+    Gold lemmas         : ['quick', 'brown', 'fox', 'jump', 'lazy', 'dog']
+    Sentence 3 lemmas  : ['apple', 'opened', 'new', 'office', 'singapore', '2023']
+    Gold lemmas         : ['apple', 'open', 'new', 'office', 'singapore', '2023']
+
+    Accuracy  : 0.7778
+    Precision : 0.8750
+    Recall    : 0.8750
+    F1-Score  : 0.8750
+
+  [spaCy]
+    Sentence 1 lemmas  : ['artificial', 'intelligence', 'transform', 'education']
+    Gold lemmas         : ['artificial', 'intelligence', 'transform', 'education']
+    Sentence 2 lemmas  : ['quick', 'brown', 'fox', 'jump', 'lazy', 'dog']
+    Gold lemmas         : ['quick', 'brown', 'fox', 'jump', 'lazy', 'dog']
+    Sentence 3 lemmas  : ['apple', 'open', 'new', 'office', 'singapore', '2023']
+    Gold lemmas         : ['apple', 'open', 'new', 'office', 'singapore', '2023']
+
+    Accuracy  : 1.0000
+    Precision : 1.0000
+    Recall    : 1.0000
+    F1-Score  : 1.0000
+
+  COMPARISON SUMMARY
+  Metric             NLTK      spaCy
+  Accuracy         0.7778     1.0000
+  Precision        0.8750     1.0000
+  Recall           0.8750     1.0000
+  F1-Score         0.8750     1.0000
+
+*Evaluate
+The experimental results across three test sentences reveal a notable performance gap between the two lemmatization libraries, NLTK and spaCy. spaCy achieved perfect scores across all metrics — Accuracy, Precision, Recall, and F1-Score all at 1.0000 — meaning every predicted lemma matched the gold standard exactly across all three sentences, demonstrating its strong handling of varied linguistic phenomena including present participles (transforming → transform), past tense verbs (opened → open), proper nouns, and numeric tokens. NLTK, by contrast, performed noticeably worse, achieving an Accuracy of 0.7778 and an F1-Score of 0.8750, with two specific failures on inflected verb forms — a present participle and a past tense — pointing to a fundamental limitation of its WordNet-based lemmatizer, which relies heavily on explicit part-of-speech tags being provided as input and defaults to treating tokens as nouns when they are absent. spaCy avoids this issue entirely by integrating POS tagging and dependency parsing directly into its processing pipeline, allowing it to infer grammatical context automatically and lemmatize verbs correctly without any manual intervention. Overall, spaCy clearly outperforms NLTK on this test set, though the evaluation is limited to just 3 sentences and 18 tokens, meaning broader generalization would require testing on a significantly larger and more diverse dataset.
